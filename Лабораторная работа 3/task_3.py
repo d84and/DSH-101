@@ -1,23 +1,22 @@
-def count_letters(stih):
-    x = stih
-    kolvo_bukv = 0
-    for i in x:
-        if i.isalpha():
-            if type(i) == str:
-                kolvo_bukv += 1
-    return kolvo_bukv
+# TODO  Напишите функцию count_letters
+def count_letters(stix):
+    nijniy_registr = stix.lower()
+    kolichestvo_bukv = {}
+    for character in nijniy_registr:
+        if character.isalpha():
+            if character in kolichestvo_bukv:
+                kolichestvo_bukv[character] += 1
+            else:
+                kolichestvo_bukv[character] = 1
+    return kolichestvo_bukv
+# TODO Напишите функцию calculate_frequency
 
-
-def calculate_frequency(str1):  # функция частоты букв
-    dict = {}
-    for n in str1:
-        keys = dict.keys()
-        if n in keys:
-            dict[n] += 1
-        else:
-            dict[n] = 1
-    return dict
-
+def calculate_frequency(kolichestvo_bukv):
+    vsego_simvolov = sum(kolichestvo_bukv.values())
+    chastota_simvolov ={}
+    for tekushiy_simvol, bukva in kolichestvo_bukv.items():
+        chastota_simvolov[tekushiy_simvol] = bukva / vsego_simvolov
+    return chastota_simvolov
 
 main_str = """
 У лукоморья дуб зелёный;
@@ -54,7 +53,10 @@ main_str = """
 Под ним сидел, и кот учёный
 Свои мне сказки говорил.
 """
-result = count_letters(main_str)
-print(result)
-result_5 = calculate_frequency(main_str)
-print(f"{result_5}")
+
+# TODO Распечатайте в столбик букву и её частоту в тексте
+tekushiy_slovar = count_letters(main_str)
+chastota_bukv = calculate_frequency(tekushiy_slovar)
+
+for simvoli, chastota in chastota_bukv.items():
+    print(f"{simvoli}: {chastota:.2f}")
